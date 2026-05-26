@@ -1,6 +1,6 @@
 import type { Championship, Team, Player, Match, PlayerStats } from './types'
 
-const API_URL = 'https://campeonato-futsal-api.onrender.com/api'
+const API_BASE = 'https://campeonato-futsal-api.onrender.com/api'
 
 async function fetcher<T>(url: string): Promise<T> {
   const res = await fetch(url)
@@ -8,7 +8,6 @@ async function fetcher<T>(url: string): Promise<T> {
   return res.json()
 }
 
-// Championships
 export async function getChampionships(): Promise<Championship[]> {
   return fetcher<Championship[]>(`${API_BASE}/championships`)
 }
@@ -23,7 +22,6 @@ export async function createChampionship(name: string): Promise<Championship> {
   return res.json()
 }
 
-// Teams
 export async function getTeams(championshipId: string): Promise<Team[]> {
   return fetcher<Team[]>(`${API_BASE}/teams?championshipId=${championshipId}`)
 }
@@ -38,7 +36,6 @@ export async function createTeam(data: { name: string; coach: string; championsh
   return res.json()
 }
 
-// Players
 export async function getPlayers(championshipId: string): Promise<Player[]> {
   return fetcher<Player[]>(`${API_BASE}/players?championshipId=${championshipId}`)
 }
@@ -58,7 +55,6 @@ export async function createPlayer(data: {
   return res.json()
 }
 
-// Matches
 export async function getMatches(championshipId: string): Promise<Match[]> {
   return fetcher<Match[]>(`${API_BASE}/matches?championshipId=${championshipId}`)
 }
@@ -80,7 +76,6 @@ export async function createMatch(data: {
   return res.json()
 }
 
-// SWR Keys
 export const swrKeys = {
   championships: `${API_BASE}/championships`,
   teams: (championshipId: string) => `${API_BASE}/teams?championshipId=${championshipId}`,
