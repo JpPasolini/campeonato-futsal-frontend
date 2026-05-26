@@ -1,6 +1,6 @@
 import type { Championship, Team, Player, Match, PlayerStats } from './types'
 
-const API_BASE = 'http://localhost:3000/api'
+const API_URL = 'https://campeonato-futsal-api.onrender.com/api'
 
 async function fetcher<T>(url: string): Promise<T> {
   const res = await fetch(url)
